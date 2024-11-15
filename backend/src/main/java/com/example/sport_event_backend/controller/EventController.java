@@ -1,7 +1,7 @@
 package com.example.sport_event_backend.controller;
 
-import com.example.sports_calendar_backend.entity.Event;
-import com.example.sports_calendar_backend.service.EventService;
+import com.example.sport_event_backend.entity.Event;
+import com.example.sport_event_backend.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

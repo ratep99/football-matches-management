@@ -1,7 +1,7 @@
 package com.example.sport_event_backend.service;
 
-import com.example.sports_calendar_backend.entity.Event;
-import com.example.sports_calendar_backend.repository.EventRepository;
+import com.example.sport_event_backend.entity.Event;
+import com.example.sport_event_backend.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

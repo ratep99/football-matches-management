@@ -3,9 +3,9 @@ version: '3.8'
 services:
   db:
     image: mysql:8
-    container_name: sport_db
+    container_name: events_db
     environment:
-      MYSQL_DATABASE: sport_db
+      MYSQL_DATABASE: events_db
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: root_password
