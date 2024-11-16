@@ -1,13 +1,25 @@
 import { Link } from "react-router-dom";
-
+import Header from "../components/Header";
+import EventsContainer from "../components/EventsContainer";
 const HomePage = () => {
-  const events = [
+ 
+
+  return (<>
+    <Header/>
+    <EventsContainer/>
+    </>
+  );
+};
+
+export default HomePage;
+
+/**
+ *  const events = [
     { eventId: 36, name: "Manchester City vs Real Madrid" },
     { eventId: 37, name: "Bayern Munich vs PSG" },
   ];
-
-  return (
-    <div>
+ * 
+ * <div>
       <h1>Upcoming Events</h1>
       <ul>
         {events.map((event) => (
@@ -16,8 +28,4 @@ const HomePage = () => {
           </li>
         ))}
       </ul>
-    </div>
-  );
-};
-
-export default HomePage;
+    </div> */

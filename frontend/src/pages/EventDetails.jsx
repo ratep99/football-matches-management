@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { getEventById } from "../services/eventService";
 
 const EventDetails = () => {
   const { id } = useParams(); 
@@ -11,15 +12,14 @@ const EventDetails = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/events/${id}`);
-        setEvent(response.data);
+        const data = await getEventById(id);
+        setEvent(data);
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-
     fetchEvent();
   }, [id]);
 

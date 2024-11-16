@@ -2,7 +2,7 @@ import {NavLink} from 'react-router-dom'
 import ball from '../assets/images/ball.png'
 const Navbar = () => {
   return (
-    <nav className="bg-[#000071] border-b border-indigo-500">
+    <nav className="bg-[#000071] border-b-2 border-[#ff0000]">
     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div className="flex h-20 items-center justify-between">
         <div
