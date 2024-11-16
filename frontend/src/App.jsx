@@ -1,18 +1,29 @@
 import React from 'react'
+import { Route,
+   createBrowserRouter,
+    createRoutesFromElements,
+     RouterProvider } from 'react-router-dom'
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import Router and Routes
 import HomePage from "./pages/HomePage";
 import EventDetails from "./pages/EventDetails";
+import MainLayout from './layouts/MainLayout';
+import { PageNotFound } from './pages/PageNotFound';
+import AddEventPage from './pages/AddEventPage';
+import EventsPage from './pages/EventsPage';
 
 const App = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path='/' element={<MainLayout/>}>
+        <Route index element={<HomePage />} />
+        <Route path="/events" element={<EventsPage/>} />
         <Route path="/event/:id" element={<EventDetails />} />
-      </Routes>
-    </Router>
+        <Route path="/add-event" element={<AddEventPage/>} />
+        <Route path='*' element={<PageNotFound/>} />
+      </Route>
+    )
   );
+  return <RouterProvider router={router} />
 }
 
-export default App
+export default App;

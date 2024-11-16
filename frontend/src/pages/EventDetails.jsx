@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const EventDetails = () => {
-  const { id } = useParams(); // Get the `id` from the URL
+  const { id } = useParams(); 
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
