@@ -9,7 +9,7 @@ const EventsContainer = () => {
     useEffect( () => { 
         const fetchEvents = async () => {
         try{
-        const data = await getAllEvents();
+        const data = await getAllEvents(true);
         setEvents(data);
         }
         catch(error){
