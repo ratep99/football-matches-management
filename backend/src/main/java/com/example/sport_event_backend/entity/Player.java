@@ -1,5 +1,6 @@
 package com.example.sport_event_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,6 +15,7 @@ public class Player {
     private String name;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "_teamId")
     private Team team;
 }

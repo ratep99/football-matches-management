@@ -13,6 +13,8 @@ public class Team {
 
     private String name;
 
+    private String logoUrl;
+
     @Column(name = "officialName")
     private String officialName;
 

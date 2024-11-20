@@ -1,5 +1,8 @@
 package com.example.sport_event_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,6 +17,7 @@ public class Goal {
     private Long goalId;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "_resultId")
     private Result result;
 
@@ -22,9 +26,20 @@ public class Goal {
     private Player player;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "_teamId")
     private Team team;
 
-    @Column(name = "timeScored")
-    private Time timeScored;
+    @Column(name = "time")
+    private Integer time;
+
+    @JsonProperty("teamId")
+    public Long getTeamId() {
+        return team != null ? team.getTeamId() : null;
+    }
+
+//    @JsonIgnore
+//    public Team getTeam() {
+//        return team;
+//    }
 }
