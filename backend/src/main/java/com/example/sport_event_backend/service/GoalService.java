@@ -92,13 +92,11 @@ public class GoalService {
         Goal goal = goalRepository.findById(goalId)
                 .orElseThrow(() -> new EntityNotFoundException("Goal not found"));
 
-        // Fetch the related result entity
         Result result = goal.getResult();
         if (result == null) {
             throw new IllegalArgumentException("Result not found for the given goal.");
         }
-
-        // Update the result's goals count based on the team
+        // Update the result's goals count based on the team that scored
         if (goal.getTeamId().equals(result.getEvent().getHomeTeam().getTeamId())) {
             if (result.getHomeGoals() != null && result.getHomeGoals() > 0) {
                 result.setHomeGoals(result.getHomeGoals() - 1);
@@ -114,11 +112,7 @@ public class GoalService {
         } else {
             throw new IllegalArgumentException("Team ID does not match either the home or away team of the event.");
         }
-
-        // Save the updated result
         resultRepository.save(result);
-
-        // Delete the goal entity
         goalRepository.delete(goal);
     }
 

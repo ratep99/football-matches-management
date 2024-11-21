@@ -11,7 +11,6 @@ import java.util.List;
 public class StageService {
     private final StageRepository stageRepository;
 
-    @Autowired
     public StageService(StageRepository stageRepository) {
         this.stageRepository = stageRepository;
     }

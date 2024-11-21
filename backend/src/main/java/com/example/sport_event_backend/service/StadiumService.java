@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class StadiumService {
-    @Autowired
-    private StadiumRepository stadiumRepository;
+
+    private final StadiumRepository stadiumRepository;
+
+    public StadiumService(StadiumRepository stadiumRepository) {
+        this.stadiumRepository = stadiumRepository;
+    }
 
     public List<StadiumProjection> getAllStadiumsForDropdown(){
         return stadiumRepository.findAllStadiumsForDropdown();

@@ -59,7 +59,7 @@ public class CardService {
         if (previousYellow.isPresent() && card.time() < previousYellow.get().getTime()) {
             throw new IllegalArgumentException("New yellow card cannot be earlier than the existing yellow card.");
         }
-        // Create a new card instance
+
         Card newCard = new Card();
         newCard.setResult(resultRepository.findById(card.resultId())
                 .orElseThrow(()-> new EntityNotFoundException("Result not found")));
@@ -82,7 +82,6 @@ public class CardService {
 
         return cardRepository.save(newCard);
     }
-
 
     public void deleteCard(Long cardId) {
         Card cardToDelete = cardRepository.findById(cardId)

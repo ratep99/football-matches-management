@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class CompetitionService {
-    @Autowired
+
     private final CompetitionRepository competitionRepository;
 
     public  CompetitionService(CompetitionRepository competitionRepository){
