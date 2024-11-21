@@ -28,14 +28,18 @@ public class Result {
 
     private String message;
 
-    @OneToMany(mappedBy = "result")
+    @OneToOne
+    @JsonIgnore
+    @JoinColumn(name = "_eventId")
+    private Event event;
+
+    @OneToMany(mappedBy = "result", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Goal> goals;
 
-    @OneToMany(mappedBy = "result")
+    @OneToMany(mappedBy = "result", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Card> cards;
-
 
     @JsonProperty("yellowCards")
     public List<Card> getYellowCards() {
@@ -46,7 +50,6 @@ public class Result {
     public List<Card> getSecondYellowCards() {
         return filterCardsByType(Card.CardType.SECOND_YELLOW);
     }
-
 
     @JsonProperty("directRedCards")
     public List<Card> getDirectRedCards() {
@@ -67,6 +70,7 @@ public class Result {
                 .filter(card -> type.equals(card.getType()))
                 .collect(Collectors.toList());
     }
+
     public enum WinnerType {
         HOME, AWAY;
     }

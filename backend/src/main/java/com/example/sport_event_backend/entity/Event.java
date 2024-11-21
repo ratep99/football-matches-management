@@ -24,10 +24,6 @@ public class Event {
     @Column(name = "dateVenue")
     private Date dateVenue;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "_resultId", unique = true)
-    private Result result;
-
     @ManyToOne
     @JoinColumn(name = "_stadiumId")
     private Stadium stadium;
@@ -47,4 +43,9 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "_stageId")
     private Stage stage;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "_resultId")
+    private Result result;
+
 }
