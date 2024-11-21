@@ -18,7 +18,6 @@ public class StadiumController {
 
     private final StadiumService stadiumService;
 
-    @Autowired
     public StadiumController(StadiumService stadiumService) {
         this.stadiumService = stadiumService;
     }

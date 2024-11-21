@@ -17,7 +17,6 @@ public class PlayerController {
 
     private final PlayerService playerService;
 
-    @Autowired
     public PlayerController(PlayerService playerService) {
         this.playerService = playerService;
     }

@@ -15,8 +15,11 @@ import java.util.Optional;
 @RequestMapping("/api/goals")
 public class GoalController {
 
-    @Autowired
-    private GoalService goalService;
+    private final GoalService goalService;
+
+    public GoalController(GoalService goalService) {
+        this.goalService = goalService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Goal>> getAllGoals() {

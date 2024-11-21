@@ -19,7 +19,6 @@ public class StageController {
 
     private final StageService stageService;
 
-    @Autowired
     public StageController(StageService stageService) {
         this.stageService = stageService;
     }

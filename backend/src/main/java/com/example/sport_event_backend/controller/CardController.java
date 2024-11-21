@@ -15,8 +15,11 @@ import java.util.Optional;
 @RequestMapping("/api/cards")
 public class CardController {
 
-    @Autowired
-    private CardService cardService;
+    private final CardService cardService;
+
+    public CardController(CardService cardService) {
+        this.cardService = cardService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Card>> getAllCards() {
