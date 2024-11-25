@@ -40,3 +40,12 @@ export const updateEvent = async (event) => {
     throw new Error('Failed to update event');
   }
 };
+
+export const deleteEvent = async (eventId) => {
+  try {
+    await axios.delete(`${API_BASE_URL}/events/${eventId}`);
+  } catch (error) {
+    console.error('Error deleting event:', error.message);
+    throw new Error('Failed to delete event');
+  }
+};
