@@ -39,10 +39,16 @@ public class EventService {
         return eventRepository.save(event);
     }
 
-    public Event update(Long eventId, Event updatedEvent) {
-        if (eventRepository.existsById(eventId)) {
-            updatedEvent.setEventId(eventId);
-            return eventRepository.save(updatedEvent);
+    public Event update(Long eventId, EventCardDTO updatedEvent) {
+        Event event = eventRepository.findById(eventId).orElse(null);
+        if (event!=null) {
+            event.setSeason(updatedEvent.season());
+            event.setCompetition(updatedEvent.competition());
+            event.setDateVenue(updatedEvent.date());
+            event.setTimeVenueUtc(updatedEvent.time());
+            event.setHomeTeam(updatedEvent.homeTeam());
+            event.setAwayTeam(updatedEvent.awayTeam());
+            return eventRepository.save(event);
         }
         return null;
     }

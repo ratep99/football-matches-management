@@ -5,6 +5,8 @@ import lombok.Data;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @Entity
@@ -19,10 +21,10 @@ public class Event {
     private String status;
 
     @Column(name = "timeVenueUtc")
-    private Time timeVenueUtc;
+    private LocalTime timeVenueUtc;
 
     @Column(name = "dateVenue")
-    private Date dateVenue;
+    private LocalDate dateVenue;
 
     @ManyToOne
     @JoinColumn(name = "_stadiumId")

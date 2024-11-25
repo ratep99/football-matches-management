@@ -45,7 +45,7 @@ public class GoalController {
 
     // Create a new goal
     @PostMapping
-    public ResponseEntity<Goal> addGoal(@RequestParam Long resultId, @Valid @RequestBody GoalDTO goalDTO) {
+    public ResponseEntity<Goal> addGoal(@Valid @RequestBody GoalDTO goalDTO) {
         Goal createdGoal = goalService.addGoal(goalDTO);
         return ResponseEntity.ok(createdGoal);
     }

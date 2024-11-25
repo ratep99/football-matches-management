@@ -14,16 +14,16 @@ public class GlobalCorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
 
-        // Allow credentials (e.g., cookies, authorization headers)
+        // Allow credentials
         config.setAllowCredentials(true);
 
         // Allow requests from your frontend origin
-        config.addAllowedOrigin("http://localhost:5173"); // You can use "*" for all origins, but it's safer to use the specific domain
+        config.addAllowedOriginPattern("http://localhost:5173"); // Using addAllowedOriginPattern for more flexible match
 
-        // Allow all headers to be sent in requests
+        // Allow all headers
         config.addAllowedHeader("*");
 
-        // Allow all HTTP methods (GET, POST, PUT, DELETE, etc.)
+        // Allow all HTTP methods
         config.addAllowedMethod("*");
 
         // Register the CORS configuration for all endpoints
