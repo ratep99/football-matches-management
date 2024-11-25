@@ -4,9 +4,10 @@ import { FaMapMarker, FaTrophy, FaClock } from 'react-icons/fa';
 
 const EventCard = ({ event }) => {
   // Null-checks for result properties
-  const homeGoals = event.result?.homeGoals ?? '-';
-  const awayGoals = event.result?.awayGoals ?? '-';
-
+  console.log("LOG EV")
+  console.log(event);
+  const homeGoals = event.homeTeamGoals ?? '-';
+  const awayGoals = event.awayTeamGoals ?? '-';
   return (
     <div className="bg-white rounded-xl shadow-md relative">
       <div className="p-4">
@@ -58,7 +59,7 @@ const EventCard = ({ event }) => {
         {/* Date and Time */}
         <div className="text-center text-gray-600 mt-2 mb-4">
           <FaClock className="inline text-indigo-500 mr-1" />
-          {event.dateVenue}, {event.timeVenueUtc} UTC
+          {event.date}, {event.time} UTC
         </div>
 
         {/* Divider */}

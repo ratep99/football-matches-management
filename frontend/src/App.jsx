@@ -10,6 +10,7 @@ import MainLayout from './layouts/MainLayout';
 import { PageNotFound } from './pages/PageNotFound';
 import AddEventPage from './pages/AddEventPage';
 import EventsPage from './pages/EventsPage';
+import EditEventPage from './pages/EditEventPage';
 
 const App = () => {
   const router = createBrowserRouter(
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/events" element={<EventsPage/>} />
         <Route path="/event/:id" element={<EventDetails />} />
         <Route path="/add-event" element={<AddEventPage/>} />
+        <Route path="/edit-event/:id" element={<EditEventPage/>} />
         <Route path='*' element={<PageNotFound/>} />
       </Route>
     )
