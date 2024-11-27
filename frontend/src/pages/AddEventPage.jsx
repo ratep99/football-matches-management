@@ -5,6 +5,7 @@ import { getAllCompetitionsForDropdown } from '../services/competitionService';
 import { getAllTeamsForDropdown } from '../services/teamService';
 import { getAllStagesForDropdown } from '../services/stageService';
 import { getAllStadiumsForDropdown } from '../services/stadiumService';
+import { FaTrophy } from 'react-icons/fa'; // Import FaTrophy here
 
 const AddEventPage = () => {
   const navigate = useNavigate();
@@ -24,7 +25,6 @@ const AddEventPage = () => {
   const [stages, setStages] = useState([]);
   const [stadiums, setStadiums] = useState([]);
 
-
   useEffect(() => {
     const fetchDropdownData = async () => {
       try {
@@ -38,7 +38,6 @@ const AddEventPage = () => {
         setTeams(Array.isArray(teamData) ? teamData : []);
         setStages(Array.isArray(stageData) ? stageData : []);
         setStadiums(Array.isArray(stadiumData) ? stadiumData : []);
-
       } catch (error) {
         console.error('Error fetching dropdown data:', error);
       }
@@ -56,23 +55,19 @@ const AddEventPage = () => {
 
   const handleDropdownChange = (e) => {
     const { name, value } = e.target;
-    console.log("logging e target" + name + "_" + value);
     setFormData((prev) => ({
-
       ...prev,
-      [name]: value, 
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    
     try {
       const updatedFormData = {
         season: formData.season,
         dateVenue: formData.dateVenue,
-        timeVenueUtc: formData.timeVenueUtc + ':00', 
+        timeVenueUtc: formData.timeVenueUtc + ':00',
         homeTeam: { teamId: parseInt(formData.homeTeamId) },
         awayTeam: { teamId: parseInt(formData.awayTeamId) },
         competition: { competitionId: formData.competitionId },
@@ -83,17 +78,19 @@ const AddEventPage = () => {
       navigate('/events');
     } catch (error) {
       console.error('Error creating event:', error);
-    } 
+    }
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen flex items-center justify-center">
-      <form onSubmit={handleSubmit} className="bg-white p-8 shadow-md rounded-lg max-w-lg w-full">
-        <h2 className="text-2xl font-bold mb-6 text-center text-indigo-600">Add New Event</h2>
+    <div className="p-10 bg-gray-100 min-h-screen flex items-center justify-center">
+      <form onSubmit={handleSubmit} className="bg-white p-10 shadow-lg rounded-xl border-t-4 border-[#000071] max-w-xl w-full">
+        <h2 className="text-3xl font-bold mb-8 text-center text-[#000071] flex items-center justify-center">
+          <FaTrophy className="mr-3 text-[#ff0000]" /> Add New Event
+        </h2>
 
         {/* Season Input */}
-        <div className="mb-4">
-          <label htmlFor="season" className="block text-gray-700 font-bold mb-2">Season</label>
+        <div className="mb-6">
+          <label htmlFor="season" className="block text-xl font-bold mb-3 text-[#000071]">Season</label>
           <input
             type="text"
             id="season"
@@ -101,45 +98,49 @@ const AddEventPage = () => {
             value={formData.season}
             onChange={handleInputChange}
             placeholder="e.g., 2024"
-            className="w-full p-2 border rounded-lg focus:outline-none focus:border-indigo-500"
+            className="w-full p-3 border-2 rounded-lg focus:outline-none focus:border-[#ff0000]"
+            style={{ borderColor: '#000071' }}
           />
         </div>
 
         {/* Date Input */}
-        <div className="mb-4">
-          <label htmlFor="dateVenue" className="block text-gray-700 font-bold mb-2">Event Date</label>
+        <div className="mb-6">
+          <label htmlFor="dateVenue" className="block text-xl font-bold mb-3 text-[#000071]">Event Date</label>
           <input
             type="date"
             id="dateVenue"
             name="dateVenue"
             value={formData.dateVenue}
             onChange={handleInputChange}
-            className="w-full p-2 border rounded-lg focus:outline-none focus:border-indigo-500"
+            className="w-full p-3 border-2 rounded-lg focus:outline-none focus:border-[#ff0000]"
+            style={{ borderColor: '#000071' }}
           />
         </div>
 
         {/* Time Input */}
-        <div className="mb-4">
-          <label htmlFor="timeVenueUtc" className="block text-gray-700 font-bold mb-2">Event Time (UTC)</label>
+        <div className="mb-6">
+          <label htmlFor="timeVenueUtc" className="block text-xl font-bold mb-3 text-[#000071]">Event Time (UTC)</label>
           <input
             type="time"
             id="timeVenueUtc"
             name="timeVenueUtc"
             value={formData.timeVenueUtc}
             onChange={handleInputChange}
-            className="w-full p-2 border rounded-lg focus:outline-none focus:border-indigo-500"
+            className="w-full p-3 border-2 rounded-lg focus:outline-none focus:border-[#ff0000]"
+            style={{ borderColor: '#000071' }}
           />
         </div>
 
         {/* Status Input */}
-        <div className="mb-4">
-          <label htmlFor="status" className="block text-gray-700 font-bold mb-2">Status</label>
+        <div className="mb-6">
+          <label htmlFor="status" className="block text-xl font-bold mb-3 text-[#000071]">Status</label>
           <select
             id="status"
             name="status"
             value={formData.status}
             onChange={handleInputChange}
-            className="w-full p-2 border rounded-lg focus:outline-none focus:border-indigo-500"
+            className="w-full p-3 border-2 rounded-lg focus:outline-none focus:border-[#ff0000]"
+            style={{ borderColor: '#000071' }}
           >
             <option value="">Select Status</option>
             <option value="scheduled">Scheduled</option>
@@ -148,14 +149,15 @@ const AddEventPage = () => {
         </div>
 
         {/* Home Team Dropdown */}
-        <div className="mb-4">
-          <label htmlFor="homeTeamId" className="block text-gray-700 font-bold mb-2">Home Team</label>
+        <div className="mb-6">
+          <label htmlFor="homeTeamId" className="block text-xl font-bold mb-3 text-[#000071]">Home Team</label>
           <select
             id="homeTeamId"
             name="homeTeamId"
             value={formData.homeTeamId}
             onChange={handleDropdownChange}
-            className="w-full p-2 border rounded-lg focus:outline-none focus:border-indigo-500"
+            className="w-full p-3 border-2 rounded-lg focus:outline-none focus:border-[#ff0000]"
+            style={{ borderColor: '#000071' }}
           >
             <option value="">Select Home Team</option>
             {teams.map((team) => (
@@ -167,14 +169,15 @@ const AddEventPage = () => {
         </div>
 
         {/* Away Team Dropdown */}
-        <div className="mb-4">
-          <label htmlFor="awayTeamId" className="block text-gray-700 font-bold mb-2">Away Team</label>
+        <div className="mb-6">
+          <label htmlFor="awayTeamId" className="block text-xl font-bold mb-3 text-[#000071]">Away Team</label>
           <select
             id="awayTeamId"
             name="awayTeamId"
             value={formData.awayTeamId}
             onChange={handleDropdownChange}
-            className="w-full p-2 border rounded-lg focus:outline-none focus:border-indigo-500"
+            className="w-full p-3 border-2 rounded-lg focus:outline-none focus:border-[#ff0000]"
+            style={{ borderColor: '#000071' }}
           >
             <option value="">Select Away Team</option>
             {teams.map((team) => (
@@ -186,14 +189,15 @@ const AddEventPage = () => {
         </div>
 
         {/* Competition Dropdown */}
-        <div className="mb-4">
-          <label htmlFor="competitionId" className="block text-gray-700 font-bold mb-2">Competition</label>
+        <div className="mb-6">
+          <label htmlFor="competitionId" className="block text-xl font-bold mb-3 text-[#000071]">Competition</label>
           <select
             id="competitionId"
             name="competitionId"
             value={formData.competitionId}
             onChange={handleDropdownChange}
-            className="w-full p-2 border rounded-lg focus:outline-none focus:border-indigo-500"
+            className="w-full p-3 border-2 rounded-lg focus:outline-none focus:border-[#ff0000]"
+            style={{ borderColor: '#000071' }}
           >
             <option value="">Select Competition</option>
             {competitions.map((competition) => (
@@ -205,14 +209,15 @@ const AddEventPage = () => {
         </div>
 
         {/* Stage Dropdown */}
-        <div className="mb-4">
-          <label htmlFor="stageId" className="block text-gray-700 font-bold mb-2">Stage</label>
+        <div className="mb-6">
+          <label htmlFor="stageId" className="block text-xl font-bold mb-3 text-[#000071]">Stage</label>
           <select
             id="stageId"
             name="stageId"
             value={formData.stageId}
             onChange={handleDropdownChange}
-            className="w-full p-2 border rounded-lg focus:outline-none focus:border-indigo-500"
+            className="w-full p-3 border-2 rounded-lg focus:outline-none focus:border-[#ff0000]"
+            style={{ borderColor: '#000071' }}
           >
             <option value="">Select Stage</option>
             {stages.map((stage) => (
@@ -224,14 +229,15 @@ const AddEventPage = () => {
         </div>
 
         {/* Stadium Dropdown */}
-        <div className="mb-4">
-          <label htmlFor="stadiumId" className="block text-gray-700 font-bold mb-2">Stadium</label>
+        <div className="mb-6">
+          <label htmlFor="stadiumId" className="block text-xl font-bold mb-3 text-[#000071]">Stadium</label>
           <select
             id="stadiumId"
             name="stadiumId"
             value={formData.stadiumId}
             onChange={handleDropdownChange}
-            className="w-full p-2 border rounded-lg focus:outline-none focus:border-indigo-500"
+            className="w-full p-3 border-2 rounded-lg focus:outline-none focus:border-[#ff0000]"
+            style={{ borderColor: '#000071' }}
           >
             <option value="">Select Stadium</option>
             {stadiums.map((stadium) => (
@@ -245,7 +251,7 @@ const AddEventPage = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="mt-6 bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg w-full transition"
+          className="mt-8 bg-[#ff0000] hover:bg-[#000071] text-white font-bold py-3 px-6 rounded-lg w-full transition-all duration-500"
         >
           Add Event
         </button>
