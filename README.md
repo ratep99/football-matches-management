@@ -1,20 +1,10 @@
 # Football Events Tracking Application
 
-Welcome to the Football Events Tracking application, a complete solution for managing football matches and events. This application features a React.js frontend, Spring Boot backend, and a MySQL database running in Docker. The following documentation will guide you through the core functionalities and setup instructions.
-
-## Table of Contents
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Architecture](#architecture)
-- [Tech Stack](#tech-stack)
-- [Screenshots](#screenshots)
-- [Setup Instructions](#setup-instructions)
-- [Database Diagram](#database-diagram)
-- [Future Enhancements](#future-enhancements)
+Welcome to the Football Events Tracking application, a complete solution for managing football matches and events. This application features a React.js frontend, Spring Boot backend, and a MySQL database running in Docker. This project is solution for Sportradar recruitment backend exercise.
 
 ## Project Overview
 
-This Football Events Tracking Application allows users to add, update, and manage events such as football matches, goals, cards, and timelines. The goal is to provide a simple yet powerful interface for football data collection and analysis.
+This Football Events Tracking Application allows users to add, update, and manage events such as football matches, goals, cards. 
 
 ## Features
 - **Add and Manage Events**: Add new football matches, manage the participating teams, and set up event details.
@@ -147,13 +137,8 @@ The MySQL database is designed following the **Third Normal Form (3NF)** to ensu
 - **Team Management Module**: Allow admins to create and manage teams, including updating rosters.
 - **Reporting and Analytics**: Add a dashboard for visualizing statistics such as total goals, cards, and other metrics.
 
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Contributing
-Feel free to raise issues and create pull requests. Contributions are welcome!
-
 ## Contact
 For any questions or feedback, reach out to:
 - **GitHub**: [ratep99](https://github.com/ratep99)
 - **LinkedIn**: [Petar Petković](https://www.linkedin.com/in/petarpetkovic99/)
+
