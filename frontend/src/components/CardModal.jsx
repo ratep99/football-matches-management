@@ -1,136 +1,124 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getPlayersByTeamId } from '../services/playerService';
 
-const CardModal = ({ event, onClose, onSave, playersDropdown = [] }) => {
-  const [cardData, setCardData] = useState({
-    playerId: '',
-    teamId: '',
-    time: '',
-    cardType: '', // 'yellow', 'second_yellow', or 'red'
-    reason: '',
-  });
+const CardModal = ({ teamId, resultId, onClose, onSave }) => {
+  const [selectedPlayer, setSelectedPlayer] = useState('');
+  const [cardType, setCardType] = useState('');
+  const [cardTime, setCardTime] = useState('');
+  const [playersDropdown, setPlayersDropdown] = useState([]);
+  const [reason, setReason] = useState('');
 
-  // Handle input change
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setCardData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
-  // Handle player selection change and autofill the team field
-  const handlePlayerChange = (e) => {
-    const selectedPlayerId = Number(e.target.value);
-    const selectedPlayer = playersDropdown.find((player) => player.playerId === selectedPlayerId);
-    if (selectedPlayer) {
-      setCardData((prev) => ({
-        ...prev,
-        playerId: selectedPlayerId,
-        teamId: selectedPlayer.teamId,
-      }));
-    }
-  };
+  useEffect(() => {
+    const fetchPlayers = async () => {
+      try {
+        const players = await getPlayersByTeamId(teamId);
+        setPlayersDropdown(players);
+      } catch (error) {
+        console.error('Error fetching players:', error.message);
+      }
+    };
 
-  // Handle save action
+    fetchPlayers();
+  }, [teamId]);
+
   const handleSave = () => {
-    onSave(cardData);
+    debugger;
+    const player = playersDropdown.find(player => player.playerId === Number(selectedPlayer));
+    if (player && cardType && cardTime && reason) {
+      const newCard = {
+        playerId:selectedPlayer,
+        teamId,
+        type: cardType,
+        time: cardTime,
+        reason: reason,
+        resultId: resultId
+      };
+      onSave(newCard);
+      onClose();
+    } else {
+      alert('Please select a valid player, card type, and card time');
+    }
   };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
         <h3 className="text-xl font-bold mb-4">Add Card</h3>
-
         <div className="mb-4">
-          <label htmlFor="playerId" className="block text-gray-700 font-bold mb-2">Player</label>
+          <label htmlFor="playerId" className="block text-gray-700 font-bold mb-2">
+            Player
+          </label>
           <select
             id="playerId"
-            name="playerId"
-            value={cardData.playerId}
-            onChange={handlePlayerChange}
-            className="w-full p-2 border rounded-lg focus:outline-none focus:border-indigo-500"
+            value={selectedPlayer}
+            onChange={(e) => setSelectedPlayer(Number(e.target.value))}
+            className="w-full p-2 border rounded-lg"
           >
             <option value="">Select Player</option>
-            {playersDropdown.length > 0 ? (
-              playersDropdown.map((player) => (
-                <option key={player.playerId} value={player.playerId}>
-                  {player.name}
-                </option>
-              ))
-            ) : (
-              <option disabled>No players available</option>
-            )}
+            {playersDropdown.map((player) => (
+              <option key={player.playerId} value={player.playerId}>
+                {player.name}
+              </option>
+            ))}
           </select>
         </div>
-
         <div className="mb-4">
-          <label htmlFor="teamId" className="block text-gray-700 font-bold mb-2">Team</label>
-          <input
-            type="text"
-            id="teamId"
-            name="teamId"
-            value={cardData.teamId}
-            onChange={handleInputChange}
-            placeholder="Team ID"
+          <label htmlFor="cardType" className="block text-gray-700 font-bold mb-2">
+            Card Type
+          </label>
+          <select
+            id="cardType"
+            value={cardType}
+            onChange={(e) => setCardType(e.target.value)}
             className="w-full p-2 border rounded-lg"
-            readOnly
-          />
+          >
+            <option value="">Select Card Type</option>
+            <option value="YELLOW">Yellow Card</option>
+            <option value="RED">Red Card</option>
+          </select>
         </div>
-
         <div className="mb-4">
-          <label htmlFor="time" className="block text-gray-700 font-bold mb-2">Time</label>
+          <label htmlFor="time" className="block text-gray-700 font-bold mb-2">
+            Time (in minutes)
+          </label>
           <input
             type="number"
             id="time"
-            name="time"
-            value={cardData.time}
-            onChange={handleInputChange}
+            value={cardTime}
+            onChange={(e) => setCardTime(e.target.value)}
             placeholder="Minute of Card"
             className="w-full p-2 border rounded-lg"
           />
         </div>
-
         <div className="mb-4">
-          <label htmlFor="cardType" className="block text-gray-700 font-bold mb-2">Card Type</label>
-          <select
-            id="cardType"
-            name="cardType"
-            value={cardData.cardType}
-            onChange={handleInputChange}
-            className="w-full p-2 border rounded-lg"
+  <label htmlFor="reason" className="block text-gray-700 font-bold mb-2">
+    Reason
+  </label>
+  <input
+    type="text"
+    id="reason"
+    value={reason}
+    onChange={(e) => setReason(e.target.value)}
+    placeholder="Reason for card"
+    className="w-full p-2 border rounded-lg"
+  />
+</div>
+
+        <div className="flex justify-end">
+          <button
+            onClick={handleSave}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg mr-2"
           >
-            <option value="">Select Card Type</option>
-            <option value="yellow">Yellow</option>
-            <option value="second_yellow">Second Yellow</option>
-            <option value="red">Red</option>
-          </select>
+            Save
+          </button>
+          <button
+            onClick={onClose}
+            className="bg-red-600 text-white px-4 py-2 rounded-lg"
+          >
+            Cancel
+          </button>
         </div>
-
-        <div className="mb-4">
-          <label htmlFor="reason" className="block text-gray-700 font-bold mb-2">Reason</label>
-          <input
-            type="text"
-            id="reason"
-            name="reason"
-            value={cardData.reason}
-            onChange={handleInputChange}
-            placeholder="Reason for Card"
-            className="w-full p-2 border rounded-lg"
-          />
-        </div>
-
-        <button
-          onClick={handleSave}
-          className="bg-green-500 text-white px-4 py-2 rounded-lg mr-2"
-        >
-          Save
-        </button>
-        <button
-          onClick={onClose}
-          className="bg-red-500 text-white px-4 py-2 rounded-lg"
-        >
-          Cancel
-        </button>
       </div>
     </div>
   );
