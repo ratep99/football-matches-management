@@ -43,20 +43,23 @@ The application is built using a **client-server** architecture. The frontend is
 ### Home Page
 ![Home Page](images/home-page.png)
 
+### Event Details Page
+![Event Details](images/eventdetails.png)
+
+### Event Timeline Page
+![Event Timeline](images/eventdetailspage.png)
+
+### Edit Event Page
+![Edit Event](images/editevent.png)
+
 ### Add Event Page
 ![Add Event](images/addEvent.png)
 
 ### All Events Page
 ![All Events](images/alleventpage.png)
 
-### Edit Event Page
-![Edit Event](images/editevent.png)
 
-### Event Details Page
-![Event Details](images/eventdetails.png)
 
-### Event Timeline Page
-![Event Timeline](images/eventdetailspage.png)
 
 ## Setup Instructions
 
