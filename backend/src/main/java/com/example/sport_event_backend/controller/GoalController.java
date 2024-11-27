@@ -37,9 +37,6 @@ public class GoalController {
     @GetMapping("/team/{teamId}")
     public ResponseEntity<List<Goal>> getGoalsByTeamId(@PathVariable Long teamId) {
         List<Goal> goals = goalService.getGoalsByTeamId(teamId);
-        if (goals.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(goals);
     }
 

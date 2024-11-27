@@ -35,9 +35,6 @@ public class CardController {
     @GetMapping("/team/{teamId}")
     public ResponseEntity<List<Card>> getCardsByTeamId(@PathVariable Long teamId) {
         List<Card> cards = cardService.getCardsByTeamId(teamId);
-        if (cards.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(cards);
     }
 
